@@ -46,6 +46,7 @@ namespace Revapp_Trainer
             this.lblGameName = new Guna.UI.WinForms.GunaLabel();
             this.topDrag = new Guna.UI.WinForms.GunaDragControl(this.components);
             this.mainDrag = new Guna.UI.WinForms.GunaDragControl(this.components);
+            this.slaveWorker = new System.ComponentModel.BackgroundWorker();
             this.topPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoPicBox)).BeginInit();
             this.mainPanel.SuspendLayout();
@@ -217,6 +218,11 @@ namespace Revapp_Trainer
             // 
             this.mainDrag.TargetControl = this.mainPanel;
             // 
+            // slaveWorker
+            // 
+            this.slaveWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.slaveWorker_DoWork);
+            this.slaveWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.slaveWorker_RunWorkerCompleted);
+            // 
             // RevApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -229,7 +235,7 @@ namespace Revapp_Trainer
             this.Name = "RevApp";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RevApp";
-            this.Load += new System.EventHandler(this.RevApp_Load);
+            this.Shown += new System.EventHandler(this.RevApp_Shown);
             this.topPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.logoPicBox)).EndInit();
             this.mainPanel.ResumeLayout(false);
@@ -255,6 +261,7 @@ namespace Revapp_Trainer
         private Guna.UI.WinForms.GunaGoogleSwitch checkMoney;
         private Guna.UI.WinForms.GunaLabel lblAmmo;
         private Guna.UI.WinForms.GunaGoogleSwitch checkAmmo;
+        private System.ComponentModel.BackgroundWorker slaveWorker;
     }
 }
 

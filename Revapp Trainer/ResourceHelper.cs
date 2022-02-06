@@ -8,7 +8,7 @@ namespace Revapp_Trainer
 {
     class ResourceHelper
     {
-        public static void AddOrUpdateResource(string key, string value)
+        public void AddOrUpdateResource(string key, string value)
         {
             var resx = new List<DictionaryEntry>();
             using (var reader = new ResXResourceReader("Data.resx"))
@@ -38,7 +38,7 @@ namespace Revapp_Trainer
             }
         }
 
-        public static string ReadResource(string key)
+        public string ReadResource(string key)
         {
             string value = "";
 
@@ -55,7 +55,7 @@ namespace Revapp_Trainer
 
         }
 
-        public static bool CheckResource(string key)
+        public bool CheckResource(string key)
         {
             var resx = new List<DictionaryEntry>();
             using (var reader = new ResXResourceReader("Data.resx"))

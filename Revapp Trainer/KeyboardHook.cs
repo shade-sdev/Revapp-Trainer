@@ -16,6 +16,8 @@ namespace Revapp_Trainer
 		/// defines the callback type for the hook
 		/// </summary>
 		public delegate int keyboardHookProc(int code, int wParam, ref keyboardHookStruct lParam);
+	
+		private keyboardHookProc hookProcDelegate;
 
 		public struct keyboardHookStruct
 		{
@@ -61,16 +63,18 @@ namespace Revapp_Trainer
 		/// </summary>
 		public KeyboardHook()
 		{
+			hookProcDelegate = hookProc;
 			hook();
 		}
 
 		/// <summary>
 		/// Releases unmanaged resources and performs other cleanup operations before the
-		/// <see cref="globalKeyboardHook"/> is reclaimed by garbage collection and uninstalls the keyboard hook.
+		/// <see cref="KeyboardHook"/> is reclaimed by garbage collection and uninstalls the keyboard hook.
 		/// </summary>
 		~KeyboardHook()
 		{
-			unhook();
+			hookProcDelegate = hookProc;
+			hook();
 		}
 		#endregion
 
@@ -80,8 +84,10 @@ namespace Revapp_Trainer
 		/// </summary>
 		public void hook()
 		{
+			
+
 			IntPtr hInstance = LoadLibrary("User32");
-			hhook = SetWindowsHookEx(WH_KEYBOARD_LL, hookProc, hInstance, 0);
+			hhook = SetWindowsHookEx(WH_KEYBOARD_LL, hookProcDelegate, hInstance, 0);
 		}
 
 		/// <summary>
