@@ -43,7 +43,12 @@ namespace Revapp_Trainer
 
         private void kh_KeyDown(object sender, KeyEventArgs e)
         {
-            
+            switch (e.KeyCode)
+            {
+                case Keys.NumPad1:
+                    checkAmmo.Checked = !checkAmmo.Checked;
+                break;
+            }
         }
 
         public static Image SetImageOpacity(Image image, float opacity)

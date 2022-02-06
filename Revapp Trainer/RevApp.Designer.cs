@@ -36,6 +36,8 @@ namespace Revapp_Trainer
             this.thisClose = new Guna.UI.WinForms.GunaControlBox();
             this.logoPicBox = new Guna.UI.WinForms.GunaPictureBox();
             this.mainPanel = new Guna.UI.WinForms.GunaPanel();
+            this.lblAmmo = new Guna.UI.WinForms.GunaLabel();
+            this.checkAmmo = new Guna.UI.WinForms.GunaGoogleSwitch();
             this.lblUnlimitedMoney = new Guna.UI.WinForms.GunaLabel();
             this.checkMoney = new Guna.UI.WinForms.GunaGoogleSwitch();
             this.lblUnlimitedHealth = new Guna.UI.WinForms.GunaLabel();
@@ -44,8 +46,6 @@ namespace Revapp_Trainer
             this.lblGameName = new Guna.UI.WinForms.GunaLabel();
             this.topDrag = new Guna.UI.WinForms.GunaDragControl(this.components);
             this.mainDrag = new Guna.UI.WinForms.GunaDragControl(this.components);
-            this.lblAmmo = new Guna.UI.WinForms.GunaLabel();
-            this.checkAmmo = new Guna.UI.WinForms.GunaGoogleSwitch();
             this.topPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoPicBox)).BeginInit();
             this.mainPanel.SuspendLayout();
@@ -122,14 +122,37 @@ namespace Revapp_Trainer
             this.mainPanel.Size = new System.Drawing.Size(800, 460);
             this.mainPanel.TabIndex = 1;
             // 
+            // lblAmmo
+            // 
+            this.lblAmmo.AutoSize = true;
+            this.lblAmmo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAmmo.ForeColor = System.Drawing.Color.White;
+            this.lblAmmo.Location = new System.Drawing.Point(24, 189);
+            this.lblAmmo.Name = "lblAmmo";
+            this.lblAmmo.Size = new System.Drawing.Size(139, 20);
+            this.lblAmmo.TabIndex = 7;
+            this.lblAmmo.Text = "Unlimited Ammo";
+            // 
+            // checkAmmo
+            // 
+            this.checkAmmo.BaseColor = System.Drawing.SystemColors.Control;
+            this.checkAmmo.CheckedOffColor = System.Drawing.Color.DarkGray;
+            this.checkAmmo.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            this.checkAmmo.FillColor = System.Drawing.Color.White;
+            this.checkAmmo.Location = new System.Drawing.Point(254, 189);
+            this.checkAmmo.Name = "checkAmmo";
+            this.checkAmmo.Size = new System.Drawing.Size(38, 19);
+            this.checkAmmo.TabIndex = 6;
+            this.checkAmmo.CheckedChanged += new System.EventHandler(this.checkAmmo_CheckedChanged);
+            // 
             // lblUnlimitedMoney
             // 
             this.lblUnlimitedMoney.AutoSize = true;
-            this.lblUnlimitedMoney.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUnlimitedMoney.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUnlimitedMoney.ForeColor = System.Drawing.Color.White;
             this.lblUnlimitedMoney.Location = new System.Drawing.Point(24, 147);
             this.lblUnlimitedMoney.Name = "lblUnlimitedMoney";
-            this.lblUnlimitedMoney.Size = new System.Drawing.Size(133, 19);
+            this.lblUnlimitedMoney.Size = new System.Drawing.Size(141, 20);
             this.lblUnlimitedMoney.TabIndex = 5;
             this.lblUnlimitedMoney.Text = "Unlimited Money";
             // 
@@ -147,11 +170,11 @@ namespace Revapp_Trainer
             // lblUnlimitedHealth
             // 
             this.lblUnlimitedHealth.AutoSize = true;
-            this.lblUnlimitedHealth.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUnlimitedHealth.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUnlimitedHealth.ForeColor = System.Drawing.Color.White;
             this.lblUnlimitedHealth.Location = new System.Drawing.Point(24, 108);
             this.lblUnlimitedHealth.Name = "lblUnlimitedHealth";
-            this.lblUnlimitedHealth.Size = new System.Drawing.Size(126, 19);
+            this.lblUnlimitedHealth.Size = new System.Drawing.Size(138, 20);
             this.lblUnlimitedHealth.TabIndex = 3;
             this.lblUnlimitedHealth.Text = "Unlimited Heath";
             // 
@@ -178,11 +201,11 @@ namespace Revapp_Trainer
             // lblGameName
             // 
             this.lblGameName.AutoSize = true;
-            this.lblGameName.Font = new System.Drawing.Font("Roboto Black", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGameName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGameName.ForeColor = System.Drawing.Color.White;
             this.lblGameName.Location = new System.Drawing.Point(22, 23);
             this.lblGameName.Name = "lblGameName";
-            this.lblGameName.Size = new System.Drawing.Size(206, 33);
+            this.lblGameName.Size = new System.Drawing.Size(233, 31);
             this.lblGameName.TabIndex = 0;
             this.lblGameName.Text = "ASSAULT CUBE";
             // 
@@ -193,29 +216,6 @@ namespace Revapp_Trainer
             // mainDrag
             // 
             this.mainDrag.TargetControl = this.mainPanel;
-            // 
-            // lblAmmo
-            // 
-            this.lblAmmo.AutoSize = true;
-            this.lblAmmo.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAmmo.ForeColor = System.Drawing.Color.White;
-            this.lblAmmo.Location = new System.Drawing.Point(24, 189);
-            this.lblAmmo.Name = "lblAmmo";
-            this.lblAmmo.Size = new System.Drawing.Size(128, 19);
-            this.lblAmmo.TabIndex = 7;
-            this.lblAmmo.Text = "Unlimited Ammo";
-            // 
-            // checkAmmo
-            // 
-            this.checkAmmo.BaseColor = System.Drawing.SystemColors.Control;
-            this.checkAmmo.CheckedOffColor = System.Drawing.Color.DarkGray;
-            this.checkAmmo.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            this.checkAmmo.FillColor = System.Drawing.Color.White;
-            this.checkAmmo.Location = new System.Drawing.Point(254, 189);
-            this.checkAmmo.Name = "checkAmmo";
-            this.checkAmmo.Size = new System.Drawing.Size(38, 19);
-            this.checkAmmo.TabIndex = 6;
-            this.checkAmmo.CheckedChanged += new System.EventHandler(this.checkAmmo_CheckedChanged);
             // 
             // RevApp
             // 

@@ -104,6 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="KeyboardHook.cs" />
+    <Compile Include="ResourceHelper.cs" />
     <Compile Include="RevApp.cs">
       <SubType>Form</SubType>
     </Compile>
