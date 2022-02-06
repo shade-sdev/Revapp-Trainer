@@ -59,7 +59,7 @@ namespace Revapp_Trainer
 
 		#region Constructors and Destructors
 		/// <summary>
-		/// Initializes a new instance of the <see cref="globalKeyboardHook"/> class and installs the keyboard hook.
+		/// Initializes a new instance of the <see cref="KeyboardHook"/> class and installs the keyboard hook.
 		/// </summary>
 		public KeyboardHook()
 		{
