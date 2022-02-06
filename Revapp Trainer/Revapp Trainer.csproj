@@ -103,6 +103,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="KeyboardHook.cs" />
     <Compile Include="RevApp.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -19,6 +19,8 @@ namespace Revapp_Trainer
 
 
         Mem memory = new Mem();
+        RevappHelper revappHelper = new RevappHelper();
+        KeyboardHook kh = new KeyboardHook();
  
         public RevApp()
         {
@@ -34,6 +36,14 @@ namespace Revapp_Trainer
                 memory.OpenProcess(PID);
             
             }
+
+            kh.HookedKeys.Add(Keys.NumPad1);
+            kh.KeyDown += new KeyEventHandler(kh_KeyDown);
+        }
+
+        private void kh_KeyDown(object sender, KeyEventArgs e)
+        {
+            
         }
 
         public static Image SetImageOpacity(Image image, float opacity)
@@ -53,40 +63,7 @@ namespace Revapp_Trainer
             return bmp;
         }
 
-        public static byte[] Jmp(ulong jmpto, ulong jmpfrom, bool nop)
-        {
-            var test = jmpto - jmpfrom;
-            var test2 = test - 5;
-            var dump = test2.ToString("x"); //Get original bytes
-
-            if (dump.Length == 7) //Make sure we have 4 bytes
-                dump = "0" + dump;
-
-            dump += "E9"; //Add JMP
-            if (nop)
-                dump = "90" + dump; //Add NOP if needed
-
-            var hex = new byte[dump.Length / 2];
-            for (var i = 0; i < hex.Length; i++)
-                hex[i] = Convert.ToByte(dump.Substring(i * 2, 2), 16); //Set each byte to 2 chars
-
-            Array.Reverse(hex); //Reverse byte array for use with Write()
-
-            return hex;
-
-        }
-
-        static string ProcessString(string input)
-        {
-            StringBuilder buffer = new StringBuilder(input.Length * 3 / 2);
-            for (int i = 0; i < input.Length; i++)
-            {
-                if ((i > 0) & (i % 2 == 0))
-                    buffer.Append(" ");
-                buffer.Append(input[i]);
-            }
-            return buffer.ToString();
-        }
+     
 
 
 
@@ -100,20 +77,20 @@ namespace Revapp_Trainer
                 UIntPtr codecavebase = memory.CreateCodeCave("base+637E9", freezebytesX, 7, 1000);
                 UIntPtr codecaveAllocAddress = UIntPtr.Add(codecavebase, freezebytesX.Length);
                 int newint = (int)codecaveAllocAddress - 7;
-                Console.WriteLine("Read Allocated Memory: 0x" + newint.ToString("X") + "\r\n" + codecaveAllocAddress);
+                //Console.WriteLine("Read Allocated Memory: 0x" + newint.ToString("X") + "\r\n" + codecaveAllocAddress);
 
                 byte[] ammo = { 0xC7, 0x06, 0x14, 0x00, 0x00, 0x00 };
                 memory.WriteMemory(newint.ToString("X"), "bytes", "0xC7 0x06 0x14 0x00 0x00 0x00");
-                memory.WriteMemory(newint.ToString("X").Remove(newint.ToString("X").Length - 1, 1) + "6", "bytes", "0x57");
-                memory.WriteMemory(newint.ToString("X").Remove(newint.ToString("X").Length - 1, 1) + "7", "bytes", "0x8B 0x7C 0x24 0x14");
+                memory.WriteMemory(revappHelper.sanitizeAddressLastChar(newint.ToString("X"), "6"), "bytes", "0x57");
+                memory.WriteMemory(revappHelper.sanitizeAddressLastChar(newint.ToString("X"), "7"), "bytes", "0x8B 0x7C 0x24 0x14");
 
          
 
               
-                ulong from = Convert.ToUInt32(newint.ToString("X").Remove(newint.ToString("X").Length - 1, 1) + "B", 16);
-                ulong to = Convert.ToUInt32("0x004637F4", 16);
-               memory.WriteMemory(newint.ToString("X").Remove(newint.ToString("X").Length - 1, 1) + "B", "bytes", ProcessString(BitConverter.ToString(Jmp(to, from, false)).Replace("-", string.Empty).ToUpper()));
-
+                ulong from = revappHelper.stringToUlong(revappHelper.sanitizeAddressLastChar(newint.ToString("X"), "B"));
+                ulong to = revappHelper.stringToUlong("0x004637F4");
+               memory.WriteMemory(revappHelper.sanitizeAddressLastChar(newint.ToString("X"), "B"), "bytes", revappHelper.jumpAddress(to, from, false));
+           
       
 
             }

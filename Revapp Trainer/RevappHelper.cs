@@ -9,19 +9,9 @@ namespace Revapp_Trainer
     class RevappHelper
     {
 
-        private string ProcessString(string input)
-        {
-            StringBuilder buffer = new StringBuilder(input.Length * 3 / 2);
-            for (int i = 0; i < input.Length; i++)
-            {
-                if ((i > 0) & (i % 2 == 0))
-                    buffer.Append(" ");
-                buffer.Append(input[i]);
-            }
-            return buffer.ToString();
-        }
+      
 
-        private byte[] jumpAddress(ulong jmpto, ulong jmpfrom, bool nop)
+        public string jumpAddress(ulong jmpto, ulong jmpfrom, bool nop)
         {
             var test = jmpto - jmpfrom;
             var test2 = test - 5;
@@ -40,8 +30,42 @@ namespace Revapp_Trainer
 
             Array.Reverse(hex); //Reverse byte array for use with Write()
 
-            return hex;
+            string hexstring = BitConverter.ToString(hex).Replace("-", string.Empty).ToUpper();
+
+            StringBuilder buffer = new StringBuilder(hexstring.Length * 3 / 2);
+            for (int i = 0; i < hexstring.Length; i++)
+            {
+                if ((i > 0) & (i % 2 == 0))
+                    buffer.Append(" ");
+                buffer.Append(hexstring[i]);
+            }
+            return buffer.ToString();
 
         }
+
+
+        public ulong stringToUlong(string input, string lastChar = null)
+        {
+            if (lastChar == null)
+            {
+                return Convert.ToUInt32(input, 16);
+            }
+            else
+            if (lastChar != null)
+         
+            {
+                return Convert.ToUInt32(input.Remove(input.Length - 1, 1) + lastChar, 16);
+            }
+
+            return Convert.ToUInt32(input, 16);
+
+        }
+
+        public string sanitizeAddressLastChar(string address, string lastChar)
+        {
+            return address.Remove(address.Length - 1, 1) + lastChar;
+        }
+
+
     }
 }
