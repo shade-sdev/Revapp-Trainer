@@ -13,7 +13,7 @@ namespace Revapp_Trainer
 {
     public partial class RevApp : Form
     {
-
+        //Discord Webhook
 
         Cheats cheats = new Cheats();
         KeyboardHook kh = new KeyboardHook();
@@ -37,7 +37,7 @@ namespace Revapp_Trainer
 
             // Adding keys to be hooked
             kh.HookedKeys.Add(Keys.NumPad1);
-
+            
             // Creating keyhook event
             kh.KeyDown += new KeyEventHandler(kh_KeyDown);
         }
